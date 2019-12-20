@@ -7,6 +7,21 @@
 
 namespace JsonRpc
 {
+	enum class JsonRpcErrorCodes : JsonRpcErrorCode
+	{
+		// Invalid JSON was received by the server.
+		// An error occurred on the server while parsing the JSON text.
+		ParseError = -32700,
+		// The JSON sent is not a valid Request object.
+		InvalidRequest = -32600,
+		// The method does not exist / is not available.
+		MethodNotFound = -32601,
+		// Invalid method parameter(s).
+		InvalidParams = -32602,
+		// Internal JSON-RPC error.
+		InternalError = -32603
+	};
+
 	class JsonRpcError
 	{
 	public:
@@ -19,6 +34,7 @@ namespace JsonRpc
 
 		operator bool() const;
 
+		bool IsServerError() const;
 		JsonRpcErrorCode Code() const;
 		const std::string& Message() const;
 		const json11::Json& Get(const std::string& key) const;

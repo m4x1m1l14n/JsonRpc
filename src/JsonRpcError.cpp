@@ -31,7 +31,7 @@ namespace JsonRpc
 	JsonRpcError JsonRpcError::Parse(const json11::Json & json)
 	{
 		const auto code = json["code"].is_number()
-			? json["code"].number_value()
+			? json["code"].int_value()
 			: throw std::invalid_argument("Error code not present in input JSON object.");
 
 		return JsonRpcError
@@ -45,6 +45,11 @@ namespace JsonRpc
 	JsonRpcError::operator bool() const
 	{
 		return (m_code != 0);
+	}
+
+	bool JsonRpcError::IsServerError() const
+	{
+		return (m_code >= -32000 && m_code <= -32099);
 	}
 
 	JsonRpcErrorCode JsonRpcError::Code() const
