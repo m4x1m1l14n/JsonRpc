@@ -3,7 +3,7 @@
 
 namespace JsonRpc
 {
-        
+	typedef int JsonRpcErrorCode;
 }
 
 #endif // __JSON_RPC_COMMON_HPP__

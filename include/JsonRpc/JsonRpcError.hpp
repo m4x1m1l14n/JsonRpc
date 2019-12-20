@@ -3,58 +3,28 @@
 
 #include <json11.hpp>
 
+#include <JsonRpc/JsonRpcCommon.hpp>
+
 namespace JsonRpc
 {
 	class JsonRpcError
 	{
 	public:
 		JsonRpcError();
-		JsonRpcError(uint64_t code);
-		JsonRpcError(uint64_t code, const std::string& message);
-		JsonRpcError(uint64_t code, const std::string& message, const json11::Json& data);
+		JsonRpcError(JsonRpcErrorCode code);
+		JsonRpcError(JsonRpcErrorCode code, const std::string& message);
+		JsonRpcError(JsonRpcErrorCode code, const std::string& message, const json11::Json& data);
 
-		static JsonRpcError Parse(const json11::Json& json)
-		{
-			// TODO Handle inputs!
+		static JsonRpcError Parse(const json11::Json& json);
 
-			return JsonRpcError
-			(
-				json["code"].int_value(),
-				json["message"].string_value(),
-				json
-			);
-		}
+		operator bool() const;
 
-		operator bool() const
-		{
-			return (m_code != 0);
-		}
-
-		uint64_t getCode() const
-		{
-			return m_code;
-		}
-
-		const std::string& getMessage() const
-		{
-			return m_message;
-		}
-
-		/*
-		// NOTE Do not know why but not building!
-		const json11::Json& operator[](const std::string& key) const
-		{
-			return m_data[key];
-		}
-		*/
-
-		const json11::Json& get(const std::string& key) const
-		{
-			return m_data[key];
-		}
+		JsonRpcErrorCode Code() const;
+		const std::string& Message() const;
+		const json11::Json& Get(const std::string& key) const;
 
 	private:
-		uint64_t m_code;
+		JsonRpcErrorCode m_code;
 		std::string m_message;
 		json11::Json m_data;
 	};
