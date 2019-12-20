@@ -1,0 +1,10 @@
+{
+    "sources": [
+        "src/JsonRpcError.cpp"
+    ],
+    "includes": [
+        ".",
+        "include",
+        "src/3rd/dropbox/json11"
+    ]
+}
