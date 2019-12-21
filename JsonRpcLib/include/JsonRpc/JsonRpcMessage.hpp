@@ -2,6 +2,7 @@
 #define __JSON_RPC_MESSAGE_HPP__
 
 #include <JsonRpc/JsonRpcCommon.hpp>
+#include <JsonRpc/JsonRpcId.hpp>
 
 namespace m4x1m1l14n
 {
@@ -10,28 +11,13 @@ namespace m4x1m1l14n
 		class JsonRpcMessage
 		{
 		public:
-			JsonRpcMessage()
-				: m_id(0)
-			{
+			JsonRpcMessage();
+			JsonRpcMessage(JsonRpcId id);
 
-			}
-
-			JsonRpcMessage(int id)
-				: m_id(id)
-			{
-				if (m_id == 0)
-				{
-					throw std::invalid_argument("0 is not a valid Id value!");
-				}
-			}
-
-			int getId() const
-			{
-				return m_id;
-			}
+			JsonRpcId Id() const;
 
 		protected:
-			int m_id;
+			JsonRpcId m_id;
 		};
 	}
 }

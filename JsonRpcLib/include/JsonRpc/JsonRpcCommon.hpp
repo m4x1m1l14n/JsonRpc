@@ -3,9 +3,12 @@
 
 #include <json11.hpp>
 
-namespace JsonRpc
+namespace m4x1m1l14n
 {
-	typedef int JsonRpcErrorCode;
+	namespace JsonRpc
+	{
+		typedef int JsonRpcErrorCode;
+	}
 }
 
 #endif // __JSON_RPC_COMMON_HPP__
